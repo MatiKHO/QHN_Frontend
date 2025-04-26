@@ -13,14 +13,16 @@ import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
-
 import { Logo } from "@/components/icons";
 
+import { useAuth } from "@/hooks/useAuth"; // 👈 Importamos el hook
+
 export const Navbar = () => {
-  
+  const { isLoggedIn, logout } = useAuth(); // 👈 Usamos el hook
 
   return (
     <HeroUINavbar maxWidth="xl" position="sticky">
+      {/* Logo y Menú principal */}
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand className="gap-3 max-w-fit">
           <Link
@@ -50,33 +52,61 @@ export const Navbar = () => {
         </div>
       </NavbarContent>
 
-      <NavbarContent
-        className="hidden sm:flex basis-1/5 sm:basis-full"
-        justify="end"
-      >
-        <NavbarItem className="hidden sm:flex gap-2">
-          <Link isExternal href={siteConfig.links.twitter} title="Twitter">
-          </Link>
-          <Link isExternal href={siteConfig.links.discord} title="Discord">
-          </Link>
-          <Link isExternal href={siteConfig.links.github} title="GitHub">
-          </Link>
+      {/* A la derecha */}
+      <NavbarContent className="hidden sm:flex basis-1/5 sm:basis-full" justify="end">
+        <NavbarItem className="hidden sm:flex gap-4 items-center">
+          {/* Redes sociales (vacías ahora) */}
+          <Link isExternal href={siteConfig.links.twitter} title="Twitter"></Link>
+          <Link isExternal href={siteConfig.links.discord} title="Discord"></Link>
+          <Link isExternal href={siteConfig.links.github} title="GitHub"></Link>
+          {/* Theme Switch */}
           <ThemeSwitch />
         </NavbarItem>
-        
-        <NavbarItem className="hidden md:flex">
+
+        {/* Dinámico: Login/Register o Perfil/Logout */}
+        <NavbarItem className="hidden md:flex gap-2 ml-4">
+          {!isLoggedIn ? (
+            <>
+              <Link
+                href="/login"
+                className="text-sm font-medium text-foreground hover:text-primary"
+              >
+                Iniciar sesión
+              </Link>
+              <Link
+                href="/register"
+                className="text-sm font-medium text-primary border border-primary rounded-md px-3 py-1 hover:bg-primary hover:text-white transition"
+              >
+                Registrarse
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/profile"
+                className="text-sm font-medium text-foreground hover:text-primary"
+              >
+                Mi Perfil
+              </Link>
+              <button
+                onClick={logout}
+                className="text-sm font-medium text-red-500 border border-red-500 rounded-md px-3 py-1 hover:bg-red-500 hover:text-white transition"
+              >
+                Cerrar sesión
+              </button>
+            </>
+          )}
         </NavbarItem>
       </NavbarContent>
 
-      
-      {/* Mobile menu */}
+      {/* Mobile */}
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <Link isExternal href={siteConfig.links.github}>
-        </Link>
+        <Link isExternal href={siteConfig.links.github}></Link>
         <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>
 
+      {/* Menú Mobile */}
       <NavbarMenu>
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
@@ -89,15 +119,48 @@ export const Navbar = () => {
                       ? "danger"
                       : "foreground"
                 }
-                href="#"
+                href={item.href}
                 size="lg"
               >
                 {item.label}
               </Link>
             </NavbarMenuItem>
           ))}
+
+          {/* Extra para móviles */}
+          {!isLoggedIn ? (
+            <>
+              <NavbarMenuItem>
+                <Link href="/login" size="lg" color="foreground">
+                  Iniciar sesión
+                </Link>
+              </NavbarMenuItem>
+              <NavbarMenuItem>
+                <Link href="/register" size="lg" color="primary">
+                  Registrarse
+                </Link>
+              </NavbarMenuItem>
+            </>
+          ) : (
+            <>
+              <NavbarMenuItem>
+                <Link href="/profile" size="lg" color="foreground">
+                  Mi Perfil
+                </Link>
+              </NavbarMenuItem>
+              <NavbarMenuItem>
+                <button
+                  onClick={logout}
+                  className="w-full text-left text-red-500 hover:text-red-600 transition"
+                >
+                  Cerrar sesión
+                </button>
+              </NavbarMenuItem>
+            </>
+          )}
         </div>
       </NavbarMenu>
     </HeroUINavbar>
   );
 };
+

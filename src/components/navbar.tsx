@@ -14,7 +14,7 @@ import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
-import { SearchIcon } from "@/components/icons";
+import { LockIcon, MailIcon, SearchIcon } from "@/components/icons";
 import { Logo } from "@/components/icons";
 
 import {
@@ -24,10 +24,21 @@ import {
   DropdownItem,
 } from "@heroui/dropdown";
 import { Avatar, AvatarIcon } from "@heroui/avatar";
-
-
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+} from "@heroui/modal";
+import { Button } from "@heroui/button";
+import { Checkbox } from "@heroui/checkbox";
 
 export const Navbar = () => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  
+
   const searchInput = (
     <Input
       aria-label="Search"
@@ -43,8 +54,6 @@ export const Navbar = () => {
       type="search"
     />
   );
-
-  
 
   return (
     <HeroUINavbar maxWidth="xl" position="sticky">
@@ -85,26 +94,93 @@ export const Navbar = () => {
         <NavbarItem className="hidden md:flex"></NavbarItem>
       </NavbarContent>
 
-      <NavbarContent justify="end">
-        <Dropdown backdrop="blur">
+      <NavbarContent className="hidden sm:flex" justify="end">
+        <Dropdown
+          backdrop="blur"
+          onOpenChange={(isOpen) => {
+            if (!isOpen) {
+              document.getElementById("focusableElement")?.focus();
+            }
+          }}
+        >
           <DropdownTrigger>
-          <Avatar
-        classNames={{
-          base: "bg-gradient-to-br from-[#FFB457] to-[#FF705B]",
-          icon: "text-black/80",
-        }}
-        icon={<AvatarIcon />}
-        size="sm"
-        className="cursor-pointer"
-
-      />
+            <Avatar
+              classNames={{
+                base: "bg-gradient-to-br from-[#FFB457] to-[#FF705B]",
+                icon: "text-black/80",
+              }}
+              icon={<AvatarIcon />}
+              size="sm"
+              className="cursor-pointer"
+            />
           </DropdownTrigger>
           <DropdownMenu aria-label="Static Actions">
-            <DropdownItem as={Link} href="#" key="register">Regístrate</DropdownItem>
-            <DropdownItem as={Link} href="#" key="sign-up">Iniciar sesión</DropdownItem>
-  
+            <DropdownItem key="register" textValue="Register">
+              Regístrate
+            </DropdownItem>
+            
+            <DropdownItem key="sign-up" textValue="Iniciar sesión" onPress={onOpen}>
+              Iniciar sesión
+            </DropdownItem>
           </DropdownMenu>
         </Dropdown>
+        {/* Desktop Modal Login */}
+            <Modal
+              isOpen={isOpen}
+              placement="top-center"
+              onOpenChange={onOpenChange}
+              backdrop="blur"
+              className="hidden sm:flex"
+            >
+              <ModalContent>
+                {(onClose) => (
+                  <>
+                    <ModalHeader className="flex flex-col gap-1">
+                      Iniciar sesión
+                    </ModalHeader>
+                    <ModalBody>
+                      <Input
+                        endContent={
+                          <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                        }
+                        label="Email"
+                        placeholder="Introduce tu email"
+                        variant="flat"
+                      />
+                      <Input
+                        endContent={
+                          <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                        }
+                        label="Password"
+                        placeholder="Introduce tu contraseña"
+                        type="password"
+                        variant="flat"
+                      />
+                      <div className="flex py-2 px-1 justify-between">
+                        <Checkbox
+                          classNames={{
+                            label: "text-small",
+                          }}
+                        >
+                          Recuérdame
+                        </Checkbox>
+                        <Link color="primary" href="#" size="sm">
+                          ¿Has olvidado la contraseña?
+                        </Link>
+                      </div>
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button color="danger" variant="flat" onPress={onClose}>
+                        Cerrar
+                      </Button>
+                      <Button color="primary" onPress={onClose}>
+                        Continuar
+                      </Button>
+                    </ModalFooter>
+                  </>
+                )}
+              </ModalContent>
+            </Modal>
 
         <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />
@@ -113,11 +189,98 @@ export const Navbar = () => {
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
         <ThemeSwitch />
-        <NavbarMenuToggle />
+        <Dropdown
+          backdrop="blur"
+          onOpenChange={(isOpen) => {
+            if (!isOpen) {
+              document.getElementById("focusableElement")?.focus();
+            }
+          }}
+        >
+          <DropdownTrigger>
+            <Avatar
+              classNames={{
+                base: "bg-gradient-to-br from-[#FFB457] to-[#FF705B]",
+                icon: "text-black/80",
+              }}
+              icon={<AvatarIcon />}
+              size="sm"
+              className="cursor-pointer"
+            />
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Static Actions">
+            <DropdownItem  key="register" textValue="Register">
+              Regístrate
+            </DropdownItem>
+            <DropdownItem key="sign-up" textValue="Iniciar sesión" onPress={onOpen}>
+              Iniciar sesión
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+        {/* Mobile Modal Login */}
+        <Modal
+              isOpen={isOpen}
+              placement="center"
+              onOpenChange={onOpenChange}
+              backdrop="blur"
+              
+            >
+              <ModalContent>
+                {(onClose) => (
+                  <>
+                    <ModalHeader className="flex flex-col gap-1">
+                      Iniciar sesión
+                    </ModalHeader>
+                    <ModalBody>
+                      <Input
+                        endContent={
+                          <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                        }
+                        label="Email"
+                        placeholder="Introduce tu email"
+                        variant="flat"
+                      />
+                      <Input
+                        endContent={
+                          <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                        }
+                        label="Password"
+                        placeholder="Introduce tu contraseña"
+                        type="password"
+                        variant="flat"
+                      />
+                      <div className="flex py-2 px-1 justify-between">
+                        <Checkbox
+                          classNames={{
+                            label: "text-small",
+                          }}
+                        >
+                          Recuérdame
+                        </Checkbox>
+                        <Link color="primary" href="#" size="sm">
+                          ¿Has olvidado la contraseña?
+                        </Link>
+                      </div>
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button color="danger" variant="flat" onPress={onClose}>
+                        Cerrar
+                      </Button>
+                      <Button color="primary" onPress={onClose}>
+                        Continuar
+                      </Button>
+                    </ModalFooter>
+                  </>
+                )}
+              </ModalContent>
+            </Modal>
+
+        
+        {/* <NavbarMenuToggle /> */}
       </NavbarContent>
 
       {/* Mobile Menu */}
-      <NavbarMenu>
+      {/* <NavbarMenu>
         {searchInput}
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
@@ -138,7 +301,7 @@ export const Navbar = () => {
             </NavbarMenuItem>
           ))}
         </div>
-      </NavbarMenu>
+      </NavbarMenu> */}
     </HeroUINavbar>
   );
 };

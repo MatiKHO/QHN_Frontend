@@ -5,7 +5,7 @@ export const siteConfig = {
   description: "Asiste a eventos que solo los niños pueden imaginar.",
   navItems: [
     {
-      label: "Home",
+      label: "Inicio",
       href: "/",
     },
     {
@@ -13,57 +13,42 @@ export const siteConfig = {
       href: "/club",
     },
     {
-      label: "Tickets",
-      href: "/tickets",
+      label: "Eventos",
+      href: "/eventos",
     },
     {
       label: "Blog",
       href: "/blog",
     },
     {
-      label: "About",
+      label: "Sobre nosotros",
       href: "/about",
     },
   ],
   navMenuItems: [
     {
-      label: "Profile",
-      href: "/profile",
+      label: "Inicio",
+      href: "/",
     },
     {
-      label: "Dashboard",
-      href: "/dashboard",
+      label: "Eventos",
+      href: "/eventos",
     },
     {
-      label: "Projects",
-      href: "/projects",
+      label: "Club",
+      href: "/club",
     },
     {
-      label: "Team",
-      href: "/team",
+      label: "Blog",
+      href: "/blog",
     },
     {
-      label: "Calendar",
-      href: "/calendar",
-    },
-    {
-      label: "Settings",
-      href: "/settings",
-    },
-    {
-      label: "Help & Feedback",
-      href: "/help-feedback",
+      label: "Sobre nosotros",
+      href: "/about",
     },
     {
       label: "Logout",
       href: "/logout",
     },
   ],
-  links: {
-    github: "https://github.com/frontio-ai/heroui",
-    twitter: "https://twitter.com/hero_ui",
-    docs: "https://heroui.com",
-    discord: "https://discord.gg/9b6yyZKmH4",
-    sponsor: "https://patreon.com/jrgarciadev",
-  },
 };

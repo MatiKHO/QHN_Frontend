@@ -1,4 +1,5 @@
 import { Link } from "@heroui/link";
+import { Input } from "@heroui/input";
 import {
   Navbar as HeroUINavbar,
   NavbarBrand,
@@ -13,10 +14,36 @@ import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
-
+import { SearchIcon } from "@/components/icons";
 import { Logo } from "@/components/icons";
 
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+} from "@heroui/dropdown";
+import { Avatar, AvatarIcon } from "@heroui/avatar";
+
+
+
 export const Navbar = () => {
+  const searchInput = (
+    <Input
+      aria-label="Search"
+      classNames={{
+        inputWrapper: "bg-default-100",
+        input: "text-sm",
+      }}
+      labelPlacement="outside"
+      placeholder="Buscar..."
+      startContent={
+        <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
+      }
+      type="search"
+    />
+  );
+
   
 
   return (
@@ -54,30 +81,44 @@ export const Navbar = () => {
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
       >
+        <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
+        <NavbarItem className="hidden md:flex"></NavbarItem>
+      </NavbarContent>
+
+      <NavbarContent justify="end">
+        <Dropdown backdrop="blur">
+          <DropdownTrigger>
+          <Avatar
+        classNames={{
+          base: "bg-gradient-to-br from-[#FFB457] to-[#FF705B]",
+          icon: "text-black/80",
+        }}
+        icon={<AvatarIcon />}
+        size="sm"
+        className="cursor-pointer"
+
+      />
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Static Actions">
+            <DropdownItem as={Link} href="#" key="register">Regístrate</DropdownItem>
+            <DropdownItem as={Link} href="#" key="sign-up">Iniciar sesión</DropdownItem>
+  
+          </DropdownMenu>
+        </Dropdown>
+
         <NavbarItem className="hidden sm:flex gap-2">
-          <Link isExternal href={siteConfig.links.twitter} title="Twitter">
-          </Link>
-          <Link isExternal href={siteConfig.links.discord} title="Discord">
-          </Link>
-          <Link isExternal href={siteConfig.links.github} title="GitHub">
-          </Link>
           <ThemeSwitch />
-        </NavbarItem>
-        
-        <NavbarItem className="hidden md:flex">
         </NavbarItem>
       </NavbarContent>
 
-      
-      {/* Mobile menu */}
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <Link isExternal href={siteConfig.links.github}>
-        </Link>
         <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>
 
+      {/* Mobile Menu */}
       <NavbarMenu>
+        {searchInput}
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>

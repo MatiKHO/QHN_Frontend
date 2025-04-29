@@ -1,3 +1,4 @@
+import { RocketIcon, MapIcon, TrophyIcon, HeartFilledIcon, BookIcon, FilmIcon } from "@/components/icons";
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
@@ -11,10 +12,6 @@ export const siteConfig = {
     {
       label: "Eventos",
       href: "/eventos",
-    },
-    {
-      label: "Categorías",
-      href: "/categorias",
     },
     {
       label: "Club",
@@ -39,16 +36,45 @@ export const siteConfig = {
       href: "/club",
     },
     {
-      label: "Blog",
-      href: "/blog",
-    },
-    {
       label: "Sobre nosotros",
       href: "/about",
     },
     {
       label: "Logout",
       href: "/logout",
+      
     },
   ],
+  categories: [
+    {
+      label: "Ocio",
+      href: "categorias/ocio",
+      icon: RocketIcon,
+    },
+    {
+      label: "Viajes",
+      href: "categorias/viajes",
+      icon: MapIcon,
+    },
+    {
+      label: "Deportes",
+      href: "categorias/deportes",
+      icon: TrophyIcon,
+    },
+    {
+      label: "Salud",
+      href: "categorias/salud",
+      icon: HeartFilledIcon,
+    },
+    {
+      label: "Eduación",
+      href: "categorias/eduacion",
+      icon: BookIcon,
+    },
+    {
+      label: "Cine",
+      href: "categorias/cine",
+      icon: FilmIcon,
+    },
+  ]
 };

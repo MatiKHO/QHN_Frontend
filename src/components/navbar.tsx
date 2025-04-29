@@ -5,9 +5,9 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  // NavbarMenuToggle,
-  // NavbarMenu,
-  // NavbarMenuItem,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
 } from "@heroui/navbar";
 import { link as linkStyles } from "@heroui/theme";
 import clsx from "clsx";
@@ -128,7 +128,7 @@ export const Navbar = () => {
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
-        {/* D</DropdownMenu>esktop Modal Login */}
+        {/* DropdownMenu>esktop Modal Login */}
             <Modal
               isOpen={isOpen}
               placement="top-center"
@@ -279,16 +279,15 @@ export const Navbar = () => {
             </Modal>
 
         
-        {/* <NavbarMenuToggle /> */}
       </NavbarContent>
 
       {/* Mobile Menu */}
-      {/* <NavbarMenu>
+      <NavbarMenu>
         {searchInput}
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
+            <NavbarMenuItem  key={`${item}-${index}`}>
+              <Link 
                 color={
                   index === 2
                     ? "primary"
@@ -304,7 +303,7 @@ export const Navbar = () => {
             </NavbarMenuItem>
           ))}
         </div>
-      </NavbarMenu> */}
+      </NavbarMenu>
 
       
          

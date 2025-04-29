@@ -15,10 +15,10 @@ import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { Logo } from "@/components/icons";
 
-import { useAuth } from "@/hooks/useAuth"; // 👈 Importamos el hook
+import { useAuth } from "@/hooks/useAuth";
 
 export const Navbar = () => {
-  const { isLoggedIn, logout } = useAuth(); // 👈 Usamos el hook
+  const { isLoggedIn, logout } = useAuth();
 
   return (
     <HeroUINavbar maxWidth="xl" position="sticky">

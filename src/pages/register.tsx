@@ -1,7 +1,7 @@
 import { Input } from "@heroui/input";
 import { Button } from "@heroui/button";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // 👈 Importamos navigate
+import { Link, useNavigate } from "react-router-dom";
 import DefaultLayout from "@/layouts/default";
 
 const Register = () => {
@@ -11,7 +11,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
-  const navigate = useNavigate(); // 👈 Para redirigir al login
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,13 +31,11 @@ const Register = () => {
 
     setError("");
 
-    // Simulamos registro exitoso
     console.log("Registro exitoso:", {
       fullName,
       email,
     });
 
-    // Redirigimos al login
     navigate("/login");
   };
 

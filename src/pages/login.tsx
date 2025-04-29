@@ -11,7 +11,7 @@ const Login = () => {
   const [error, setError] = useState("");
 
   const { login } = useAuth();
-  const navigate = useNavigate(); // Para redirigir
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,9 +23,8 @@ const Login = () => {
 
     setError("");
 
-    // ✅ Login correcto
     login();
-    navigate("/"); // <-- Aquí ahora redirigimos al Home
+    navigate("/");
   };
 
   return (

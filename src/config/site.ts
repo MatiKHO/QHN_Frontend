@@ -9,16 +9,16 @@ export const siteConfig = {
       href: "/",
     },
     {
-      label: "Club",
-      href: "/club",
-    },
-    {
       label: "Eventos",
       href: "/eventos",
     },
     {
-      label: "Blog",
-      href: "/blog",
+      label: "Categorías",
+      href: "/categorias",
+    },
+    {
+      label: "Club",
+      href: "/club",
     },
     {
       label: "Sobre nosotros",

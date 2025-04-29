@@ -5,6 +5,9 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
+  // NavbarMenuToggle,
+  // NavbarMenu,
+  // NavbarMenuItem,
 } from "@heroui/navbar";
 import { link as linkStyles } from "@heroui/theme";
 import clsx from "clsx";
@@ -34,6 +37,7 @@ import { Checkbox } from "@heroui/checkbox";
 
 export const Navbar = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   
 
   const searchInput = (
@@ -53,7 +57,8 @@ export const Navbar = () => {
   );
 
   return (
-    <HeroUINavbar maxWidth="xl" position="sticky">
+  
+    <HeroUINavbar isBordered  maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand className="gap-3 max-w-fit">
           <Link
@@ -67,7 +72,7 @@ export const Navbar = () => {
         </NavbarBrand>
         <div className="hidden lg:flex gap-4 justify-start ml-2">
           {siteConfig.navItems.map((item) => (
-            <NavbarItem key={item.href}>
+            <NavbarItem  key={item.href}>
               <Link
                 className={clsx(
                   linkStyles({ color: "foreground" }),
@@ -82,6 +87,8 @@ export const Navbar = () => {
           ))}
         </div>
       </NavbarContent>
+
+      
 
       <NavbarContent
         className="hidden sm:flex basis-1/5 sm:basis-full"
@@ -121,7 +128,7 @@ export const Navbar = () => {
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
-        {/* Desktop Modal Login */}
+        {/* D</DropdownMenu>esktop Modal Login */}
             <Modal
               isOpen={isOpen}
               placement="top-center"
@@ -220,7 +227,6 @@ export const Navbar = () => {
               placement="center"
               onOpenChange={onOpenChange}
               backdrop="blur"
-              
             >
               <ModalContent>
                 {(onClose) => (
@@ -299,6 +305,10 @@ export const Navbar = () => {
           ))}
         </div>
       </NavbarMenu> */}
+
+      
+         
+    
     </HeroUINavbar>
   );
 };

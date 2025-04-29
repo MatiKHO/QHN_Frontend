@@ -305,7 +305,7 @@ export const Navbar = () => {
         </div>
       </NavbarMenu>
 
-      
+      <NavbarMenuToggle />
          
     
     </HeroUINavbar>

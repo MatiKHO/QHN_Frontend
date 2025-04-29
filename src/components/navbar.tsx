@@ -5,7 +5,7 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  NavbarMenuToggle,
+  // NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
 } from "@heroui/navbar";
@@ -305,7 +305,7 @@ export const Navbar = () => {
         </div>
       </NavbarMenu>
 
-      <NavbarMenuToggle />
+      {/* <NavbarMenuToggle /> */}
          
     
     </HeroUINavbar>

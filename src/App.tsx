@@ -6,7 +6,6 @@ import ClubPage from "@/pages/club";
 import AboutPage from "@/pages/about";
 import "leaflet/dist/leaflet.css";
 
-
 function App() {
   return (
     <Routes>
@@ -19,3 +18,5 @@ function App() {
 }
 
 export default App;
+
+

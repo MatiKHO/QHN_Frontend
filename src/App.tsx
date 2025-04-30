@@ -4,6 +4,7 @@ import HomePage from "@/pages/home";
 import EventsPage from "@/pages/events";
 import ClubPage from "@/pages/club";
 import AboutPage from "@/pages/about";
+import "leaflet/dist/leaflet.css";
 
 function App() {
   return (
@@ -17,3 +18,5 @@ function App() {
 }
 
 export default App;
+
+

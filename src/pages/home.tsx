@@ -39,11 +39,11 @@ const HomePage = () => {
         </div>
 
         {/* Botón para mostrar/ocultar el mapa */}
-        <div className="mt-6">
+        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-[1000]">
           <Card
             isPressable
             onPress={() => setShowMap(!showMap)}
-            className="w-[150px] py-3 px-4 bg-content1 text-black dark:text-white shadow-none hover:scale-105 transition-transform duration-300 text-center whitespace-nowrap"
+            className="w-[150px] py-3 px-4 bg-black text-white dark:bg-white dark:text-black shadow-none hover:scale-105 transition-transform duration-300 text-center whitespace-nowrap"
           >
             <CardHeader className="flex flex-col items-center justify-center p-0">
               <span className="font-medium text-sm">
@@ -55,8 +55,10 @@ const HomePage = () => {
       </section>
 
       {showMap ? (
-        <section className="flex justify-center items-center py-4 px-4 bg-transparent min-h-[80vh]">
-          <div className="w-full h-[80vh] max-w-7xl">
+        <section className={`flex justify-center items-center py-4 px-4 bg-transparent min-h-[80vh] transition-opacity duration-500 ${
+      showMap ? "opacity-100" : "opacity-0"
+    }`}>
+          <div className="w-full h-[80vh] max-w-7xl rounded-lg overflow-hidden shadow-lg">
             <LeafletMap
               center={mapCenter}
               zoom={15}

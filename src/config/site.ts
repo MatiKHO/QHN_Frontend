@@ -67,8 +67,8 @@ export const siteConfig = {
       icon: HeartFilledIcon,
     },
     {
-      label: "Eduación",
-      href: "categorias/eduacion",
+      label: "Educación",
+      href: "categorias/educacion",
       icon: BookIcon,
     },
     {

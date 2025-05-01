@@ -10,6 +10,7 @@ import { Image } from "@heroui/image";
 import { Card, CardHeader, CardBody } from "@heroui/card";
 import { siteConfig } from "@/config/site";
 import { MapIcon } from "@/components/icons";
+import { Link } from "@heroui/link";
 
 const HomePage = () => {
   const [showMap, setShowMap] = useState(false);
@@ -17,6 +18,7 @@ const HomePage = () => {
   const mapCenter: LatLngExpression = [40.4168, -3.7038];
 
   const [events, setEvents] = useState([]);
+  const [randomEvents, setRandomEvents] = useState()
 
   const fetchEventsByTag = async (tag: string) => {
     try {
@@ -85,7 +87,7 @@ const HomePage = () => {
           <div className="w-full h-[80vh] max-w-7xl rounded-lg overflow-hidden shadow-lg ">
             <LeafletMap
               center={mapCenter}
-              zoom={6}
+              zoom={10}
               scrollWheelZoom={true}
               style={{
                 height: "100%",
@@ -108,8 +110,8 @@ const HomePage = () => {
 
                 return (
                   <Marker key={event.event_id} position={[lat, lng]}>
-                    <Popup>
-                      <strong>{event.name}</strong>
+                    <Popup className="cursor-pointer">
+                      <Link>{event.name}</Link>
                       <br />
                       {event.venue_name}
                       <br />
@@ -175,6 +177,10 @@ const HomePage = () => {
               </Card>
             ))}
           </section>
+
+          
+
+
         </>
       )}
     </DefaultLayout>

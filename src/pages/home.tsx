@@ -1,7 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { MapContainer as LeafletMap, TileLayer } from "react-leaflet";
+import { useState, useEffect } from "react";
+import {
+  MapContainer as LeafletMap,
+  TileLayer,
+  Marker,
+  Popup,
+} from "react-leaflet";
 import type { LatLngExpression } from "leaflet";
 import { Marker, Popup } from "react-leaflet";
 import { title } from "@/components/primitives";
@@ -12,10 +17,34 @@ import { siteConfig } from "@/config/site";
 import { MapIcon } from "@/components/icons";
 import { Link } from "@heroui/link";
 
+type Evento = {
+  event_id: string;
+  name: string;
+  url?: string;
+  latitude: string;
+  longitude: string;
+};
+
 const HomePage = () => {
   const [showMap, setShowMap] = useState(false);
+  const [events, setEvents] = useState<Evento[]>([]);
 
-  const mapCenter: LatLngExpression = [40.4168, -3.7038];
+  const mapCenter: LatLngExpression = [40.4168, -3.7038]; // Madrid
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const res = await fetch("https://qhn-backend.onrender.com/api/events");
+        const data = await res.json();
+        console.log("EVENTOS CARGADOS:", data);
+        setEvents(data);
+      } catch (error) {
+        console.error("Error al cargar eventos:", error);
+      }
+    };
+
+    fetchEvents();
+  }, []);
 
   const [events, setEvents] = useState([]);
   const [randomEvents, setRandomEvents] = useState()
@@ -87,7 +116,9 @@ const HomePage = () => {
           <div className="w-full h-[80vh] max-w-7xl rounded-lg overflow-hidden shadow-lg ">
             <LeafletMap
               center={mapCenter}
-              zoom={10}
+
+              zoom={13}
+              
               scrollWheelZoom={true}
               style={{
                 height: "100%",
@@ -99,27 +130,43 @@ const HomePage = () => {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              {events.map((event: any) => {
-                const lat = parseFloat(event.latitude);
-                const lng = parseFloat(event.longitude);
+              
+              {events
+                .filter(
+                  (evento) =>
+                    evento.latitude &&
+                    evento.longitude &&
+                    !isNaN(parseFloat(evento.latitude)) &&
+                    !isNaN(parseFloat(evento.longitude))
+                )
 
-                console.log("Event:", event); // Verifica los datos del evento
-                console.log("Coordinates:", { lat, lng }); // Verifica las coordenadas
-
-                if (isNaN(lat) || isNaN(lng)) return null;
-
-                return (
-                  <Marker key={event.event_id} position={[lat, lng]}>
-                    <Popup className="cursor-pointer">
-                      <Link>{event.name}</Link>
-                      <br />
-                      {event.venue_name}
-                      <br />
-                      {event.start_date}
+                .map((evento) => (
+                  <Marker
+                    key={evento.event_id}
+                    position={[
+                      parseFloat(evento.latitude),
+                      parseFloat(evento.longitude),
+                    ]}
+                  >
+                    <Popup>
+                      <div className="space-y-1">
+                        <p className="font-semibold">{evento.name}</p>
+                        {evento.url && (
+                          <a
+                            href={evento.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 underline"
+                          >
+                            Ver evento
+                          </a>
+                        )}
+                      </div>
                     </Popup>
                   </Marker>
-                );
-              })}
+                ))}
+              
+                
             </LeafletMap>
           </div>
         </section>

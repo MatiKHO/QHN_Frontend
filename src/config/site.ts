@@ -1,4 +1,4 @@
-import { RocketIcon, MapIcon, TrophyIcon, HeartFilledIcon, BookIcon, FilmIcon } from "@/components/icons";
+import { RocketIcon, PopUpIcon, TrophyIcon, HeartFilledIcon, BookIcon, FilmIcon } from "@/components/icons";
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
@@ -54,7 +54,7 @@ export const siteConfig = {
     {
       label: "Viajes",
       href: "categorias/viajes",
-      icon: MapIcon,
+      icon: PopUpIcon,
     },
     {
       label: "Deportes",
@@ -67,8 +67,8 @@ export const siteConfig = {
       icon: HeartFilledIcon,
     },
     {
-      label: "Eduación",
-      href: "categorias/eduacion",
+      label: "Educación",
+      href: "categorias/educacion",
       icon: BookIcon,
     },
     {

@@ -8,11 +8,14 @@ import {
   Popup,
 } from "react-leaflet";
 import type { LatLngExpression } from "leaflet";
+import { Marker, Popup } from "react-leaflet";
 import { title } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
 import { Image } from "@heroui/image";
 import { Card, CardHeader, CardBody } from "@heroui/card";
 import { siteConfig } from "@/config/site";
+import { MapIcon } from "@/components/icons";
+import { Link } from "@heroui/link";
 
 type Evento = {
   event_id: string;
@@ -43,6 +46,25 @@ const HomePage = () => {
     fetchEvents();
   }, []);
 
+  const [events, setEvents] = useState([]);
+  const [randomEvents, setRandomEvents] = useState()
+
+  const fetchEventsByTag = async (tag: string) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/eventsByTag?tags=${encodeURIComponent(tag)}`
+      );
+      const data = await response.json();
+
+      if (!response.ok) throw new Error(data.error || "Error fetching events");
+
+      setEvents(data); // guarda eventos para mostrarlos en el mapa
+    } catch (error) {
+      console.error("Error fetching events by tag:", error);
+      setEvents([]);
+    }
+  };
+
   return (
     <DefaultLayout>
       {/* Categorías + Botón */}
@@ -54,6 +76,7 @@ const HomePage = () => {
               <Card
                 key={category.label}
                 isPressable
+                onPress={() => fetchEventsByTag(category.label)}
                 className="w-[150px] py-4 px-4 hover:scale-105 transition-transform duration-300 text-center whitespace-nowrap"
               >
                 <CardHeader className="pb-0 pt-2 px-4 flex-col items-center">
@@ -68,15 +91,16 @@ const HomePage = () => {
         </div>
 
         {/* Botón para mostrar/ocultar el mapa */}
-        <div className="mt-6">
+        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-[1000]">
           <Card
             isPressable
             onPress={() => setShowMap(!showMap)}
-            className="w-[150px] py-3 px-4 bg-content1 text-black dark:text-white shadow-none hover:scale-105 transition-transform duration-300 text-center whitespace-nowrap"
+            className="w-[150px] py-3 px-4 bg-black text-white dark:bg-white dark:text-black shadow-none hover:scale-105 transition-transform duration-300 text-center whitespace-nowrap"
           >
-            <CardHeader className="flex flex-col items-center justify-center p-0">
-              <span className="font-medium text-sm">
+            <CardHeader className="flex flex-row items-center justify-center p-0">
+              <span className="font-medium text-sm flex items-center gap-2">
                 {showMap ? "Ocultar mapa" : "Mostrar mapa"}
+                <MapIcon />
               </span>
             </CardHeader>
           </Card>
@@ -84,11 +108,17 @@ const HomePage = () => {
       </section>
 
       {showMap ? (
-        <section className="flex justify-center items-center py-4 px-4 bg-transparent min-h-[80vh]">
-          <div className="w-full h-[80vh] max-w-7xl">
+        <section
+          className={`flex justify-center items-center py-4 px-4 bg-transparent min-h-[80vh] transition-opacity duration-500 ${
+            showMap ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <div className="w-full h-[80vh] max-w-7xl rounded-lg overflow-hidden shadow-lg ">
             <LeafletMap
               center={mapCenter}
+
               zoom={13}
+              
               scrollWheelZoom={true}
               style={{
                 height: "100%",
@@ -100,7 +130,7 @@ const HomePage = () => {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-
+              
               {events
                 .filter(
                   (evento) =>
@@ -135,6 +165,8 @@ const HomePage = () => {
                     </Popup>
                   </Marker>
                 ))}
+              
+                
             </LeafletMap>
           </div>
         </section>
@@ -192,6 +224,10 @@ const HomePage = () => {
               </Card>
             ))}
           </section>
+
+          
+
+
         </>
       )}
     </DefaultLayout>

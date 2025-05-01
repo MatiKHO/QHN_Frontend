@@ -1,12 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import {
-  MapContainer as LeafletMap,
-  TileLayer,
-  Marker,
-  Popup,
-} from "react-leaflet";
+import { MapContainer as LeafletMap, TileLayer } from "react-leaflet";
 import type { LatLngExpression } from "leaflet";
 import { Marker, Popup } from "react-leaflet";
 import { title } from "@/components/primitives";
@@ -15,7 +10,6 @@ import { Image } from "@heroui/image";
 import { Card, CardHeader, CardBody } from "@heroui/card";
 import { siteConfig } from "@/config/site";
 import { MapIcon } from "@/components/icons";
-import { Link } from "@heroui/link";
 
 type Evento = {
   event_id: string;
@@ -45,9 +39,6 @@ const HomePage = () => {
 
     fetchEvents();
   }, []);
-
-  const [events, setEvents] = useState([]);
-  const [randomEvents, setRandomEvents] = useState()
 
   const fetchEventsByTag = async (tag: string) => {
     try {
@@ -116,9 +107,7 @@ const HomePage = () => {
           <div className="w-full h-[80vh] max-w-7xl rounded-lg overflow-hidden shadow-lg ">
             <LeafletMap
               center={mapCenter}
-
               zoom={13}
-              
               scrollWheelZoom={true}
               style={{
                 height: "100%",
@@ -130,7 +119,7 @@ const HomePage = () => {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              
+
               {events
                 .filter(
                   (evento) =>
@@ -165,8 +154,6 @@ const HomePage = () => {
                     </Popup>
                   </Marker>
                 ))}
-              
-                
             </LeafletMap>
           </div>
         </section>
@@ -224,10 +211,6 @@ const HomePage = () => {
               </Card>
             ))}
           </section>
-
-          
-
-
         </>
       )}
     </DefaultLayout>

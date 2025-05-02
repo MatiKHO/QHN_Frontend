@@ -30,7 +30,6 @@ const HomePage = () => {
       try {
         const res = await fetch("https://qhn-backend.onrender.com/api/events");
         const data = await res.json();
-        console.log("EVENTOS CARGADOS:", data);
         setEvents(data);
       } catch (error) {
         console.error("Error al cargar eventos:", error);
@@ -218,3 +217,5 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+

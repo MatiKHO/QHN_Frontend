@@ -10,8 +10,8 @@ export const siteConfig = {
       href: "/",
     },
     {
-      label: "Eventos",
-      href: "/eventos",
+      label: "EventBot",
+      href: "/event-bot",
     },
     {
       label: "Club",
@@ -28,8 +28,8 @@ export const siteConfig = {
       href: "/",
     },
     {
-      label: "Eventos",
-      href: "/eventos",
+      label: "EventBot",
+      href: "/event-bot",
     },
     {
       label: "Club",

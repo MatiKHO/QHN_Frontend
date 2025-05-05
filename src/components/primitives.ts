@@ -41,13 +41,36 @@ export const title = tv({
 });
 
 export const subtitle = tv({
-  base: "w-full md:w-1/2 my-2 text-lg lg:text-xl text-default-600 block max-w-full",
+  base: "w-full md:w-1/2 my-2 text-lg lg:text-xl block max-w-full",
   variants: {
     fullWidth: {
       true: "!w-full",
     },
+    color: {
+      violet: "from-[#FF1CF7] to-[#b249f8]",
+      yellow: "from-[#FFD66B] to-[#FFB457]",
+      blue: "from-[#6EC1E4] to-[#6EC1E4]",
+      green: "from-[#6FEE8D] to-[#17c964]",
+      pink: "from-[#FF72E1] to-[#F54C7A]",
+      foreground: "dark:from-[#FFFFFF] dark:to-[#4B4B4B]",
+      white: "from-[#FFFFFF] to-[#FFFFFF]",
+    }
   },
   defaultVariants: {
     fullWidth: true,
   },
+  compoundVariants: [
+    {
+      color: [
+        "violet",
+        "yellow",
+        "blue",
+        "green",
+        "pink",
+        "foreground",
+        "white",
+      ],
+      class: "bg-clip-text text-transparent bg-gradient-to-b",
+    },
+  ],
 });

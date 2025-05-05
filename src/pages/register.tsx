@@ -31,10 +31,7 @@ const Register = () => {
 
     setError("");
 
-    console.log("Registro exitoso:", {
-      fullName,
-      email,
-    });
+   
 
     navigate("/login");
   };

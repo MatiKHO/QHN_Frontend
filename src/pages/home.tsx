@@ -33,7 +33,6 @@ const HomePage = () => {
           method: "GET"
         });
         const data = await res.json();
-        console.log(data);
         setEvents(data);
       } catch (error) {
         console.error("Error al cargar eventos:", error);

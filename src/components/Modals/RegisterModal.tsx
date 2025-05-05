@@ -32,27 +32,16 @@ export const RegisterModal = ({
   const [error, setError] = useState("");
   const [showLoginLink, setShowLoginLink] = useState(false);
 
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
+    // Validate passwords
     if (password !== confirmPassword) {
       setError("Las contraseñas no coinciden");
       return;
     }
-
-    const userData = { fullName, email, password };
-    console.log(userData);
-    console.log("Intentando registrar usuario:", userData); // Log antes de llamar a la función de registro
-
-    try {
-      const result = await registerUser(userData);
-      console.log("Usuario registrado exitosamente:", result); // Log para verificar el resultado
-      onClose();
-      onOpenLoginModal();
-    } catch (error) {
-      setError("Error al registrar el usuario");
-    }
-
+  
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
     if (!passwordRegex.test(password)) {
       setError(
@@ -60,12 +49,23 @@ export const RegisterModal = ({
       );
       return;
     }
-
-    setError("");
-
-    onClose();
-    onOpenLoginModal();
+  
+    setError(""); // Clear previous errors
+  
+    const userData = { fullName, email, password };
+  
+    try {
+      const result = await registerUser(userData);
+      console.log("Usuario registrado exitosamente:", result);
+      onClose(); // Close the modal
+      onOpenLoginModal(); // Open the login modal
+    } catch (error: any) {
+      setError(error.message || "Error al registrar el usuario");
+    }
   };
+
+  
+
   return (
     <Modal
       isOpen={isOpen}
@@ -74,7 +74,7 @@ export const RegisterModal = ({
         if (!open) onClose();
       }}
       backdrop="blur"
-      onSubmit={handleSubmit}
+      
       
     >
       <ModalContent>
@@ -84,6 +84,7 @@ export const RegisterModal = ({
               Regístrate
             </ModalHeader>
             <ModalBody>
+              <form onSubmit={handleSubmit} className="flex flex-col gap-1">
               <Input
                 type="text"
                 value={fullName}
@@ -147,18 +148,19 @@ export const RegisterModal = ({
               )}
                 
               </div>
-            </ModalBody>
             <ModalFooter>
               <Button color="danger" variant="flat" onPress={onClose}>
                 Cerrar
               </Button>
-              <Button type="submit" color="primary" onPress={onClose} onSubmit={handleSubmit}>
+              <Button type="submit" color="primary"  >
                 Registrarse
               </Button>
               {error && (
                 <div className="text-red-600 text-sm text-center">{error}</div>
               )}
             </ModalFooter>
+            </form>
+              </ModalBody>
           </>
         )}
       </ModalContent>

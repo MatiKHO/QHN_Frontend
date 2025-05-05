@@ -20,32 +20,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const registerUser = async (userData: { fullName: string; email: string; password: string }) => {
-    try {
-        console.log("Datos enviados al backend:", userData); 
-      const response = await fetch("http://localhost:3000/api/users/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
-
-      console.log("Respuesta del backend (raw):", response); // Log para verificar la respuesta cruda
-
-
-      const data = await response.json();
-      console.log("Respuesta del backend:", data); 
-      if (response.ok) {
-        console.log("User registered successfully:", data);
-        return true; // Indica que el registro fue exitoso
-      } else {
-        console.error("Error registering user:", data.error);
-        throw new Error(data.error || "Error al registrar el usuario");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      throw error;
+    const response = await fetch("http://localhost:3000/api/users/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+  
+    const data = await response.json();
+  
+    if (!response.ok) {
+      throw new Error(data.message || "Error al registrar el usuario");
     }
+  
+    return data; 
   };
 
   const login = async (credentials: { email: string; password: string }) => {

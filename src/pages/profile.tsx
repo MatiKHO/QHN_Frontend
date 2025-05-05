@@ -3,7 +3,6 @@ import DefaultLayout from "@/layouts/default";
 const Profile = () => {
   const handleLogout = () => {
     // Aquí pondremos la lógica de cerrar sesión
-    console.log("Cerrar sesión");
   };
 
   return (

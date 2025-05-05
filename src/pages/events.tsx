@@ -1,13 +1,75 @@
 import { title } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
+import { Button } from "@heroui/button";
+import { useState } from "react";
+import {Spinner} from "@heroui/spinner"
+
 
 export default function EventsPage() {
+  const [chatVisible, setChatVisible] = useState(false);
+  const [prompt, setPrompt] = useState("");
+  const [response, setResponse] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const sendPrompt = async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch("http://localhost:3000/api/chat/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt }),
+      });
+
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      setResponse(data.response);
+
+    } catch (error: any) {
+      console.error("Error fetching AI response:", error.message);
+      alert("Error fetching AI response. Please try again."); 
+    } finally {
+      setIsLoading(false);
+
+    }
+  }
   return (
     <DefaultLayout>
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
         <div className="inline-block max-w-lg text-center justify-center">
           <h1 className={title()}>Eventos</h1>
         </div>
+        <div>
+          <Button style={{backgroundColor: "#FFD66B"}}  className= "text-black dark:bg-white" onPress={() => setChatVisible(!chatVisible)}>Abrir Chat</Button>
+        </div>
+        {chatVisible && (
+          <div className="w-full max-w-lg p-4 mt-4 border rounded shadow">
+            <textarea
+              className="w-full p-2 border rounded"
+              placeholder="Preguntame algo.."
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+            />
+            <Button className="mt-2" onPress={sendPrompt}>
+              Enviar
+            </Button>
+
+            <div className="mt-4">
+              {isLoading ? (
+                <Spinner classNames={{label: "text-foreground mt-4"}} label="Pensando..." variant="dots" color="warning" />
+              ) : (
+                response && <p>{response}</p>
+              )}
+            </div>
+ 
+            
+          </div>
+        )}
       </section>
     </DefaultLayout>
   );

@@ -6,6 +6,7 @@ import {
   NavbarContent,
   NavbarItem,
   NavbarMenu,
+  NavbarMenuToggle,
   NavbarMenuItem,
 } from "@heroui/navbar";
 import { link as linkStyles } from "@heroui/theme";
@@ -141,6 +142,8 @@ export const Navbar = () => {
       {modalState.login && (
         <LoginModal isOpen={modalState.login} onClose={closeModals} />
       )}
+
+      <NavbarMenuToggle className="lg:hidden"/>
     </HeroUINavbar>
   );
 };

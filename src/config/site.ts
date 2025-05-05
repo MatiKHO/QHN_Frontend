@@ -2,7 +2,7 @@ import { RocketIcon, PopUpIcon, TrophyIcon, HeartFilledIcon, BookIcon, FilmIcon 
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Vite + HeroUI",
+  name: "QHN",
   description: "Asiste a eventos que solo los niños pueden imaginar.",
   navItems: [
     {
@@ -39,11 +39,7 @@ export const siteConfig = {
       label: "Sobre nosotros",
       href: "/about",
     },
-    {
-      label: "Logout",
-      href: "/logout",
-      
-    },
+    
   ],
   categories: [
     {

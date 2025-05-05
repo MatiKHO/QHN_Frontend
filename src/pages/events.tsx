@@ -51,7 +51,7 @@ export default function EventsPage() {
           <div className="w-full max-w-lg p-4 mt-4 border rounded shadow">
             <textarea
               className="w-full p-2 border rounded"
-              placeholder="Preguntame algo.."
+              placeholder="Pregunta sugerida: ¡Hola! Me llamo Juan y estoy de vacaciones en Madrid con mi hija de 5 años. ¿Qué planes me recomiendas?"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
             />

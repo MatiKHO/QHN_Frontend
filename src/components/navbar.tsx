@@ -50,6 +50,7 @@ export const Navbar = () => {
       
     />
   );
+  
 
   return (
     <HeroUINavbar maxWidth="xl" position="sticky">
@@ -113,7 +114,7 @@ export const Navbar = () => {
                     ? "danger"
                     : "foreground"
                 }
-                href="#"
+                href={item.href}
                 size="lg"
               >
                 {item.label}
@@ -128,6 +129,8 @@ export const Navbar = () => {
         <ThemeSwitch />
         <AvatarDropdown onRegister={openRegisterModal} onLogin={openLoginModal} />
       </NavbarContent>
+      <NavbarMenuToggle className="lg:hidden"/>
+
 
       {/* Modals */}
       {modalState.register && (
@@ -143,7 +146,6 @@ export const Navbar = () => {
         <LoginModal isOpen={modalState.login} onClose={closeModals} />
       )}
 
-      <NavbarMenuToggle className="lg:hidden"/>
     </HeroUINavbar>
   );
 };

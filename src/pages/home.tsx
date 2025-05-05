@@ -29,8 +29,11 @@ const HomePage = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await fetch("https://qhn-backend.onrender.com/api/events");
+        const res = await fetch("https://qhn-backend.onrender.com/api/events", {
+          method: "GET"
+        });
         const data = await res.json();
+        console.log(data);
         setEvents(data);
       } catch (error) {
         console.error("Error al cargar eventos:", error);

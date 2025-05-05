@@ -1,4 +1,4 @@
-import { RocketIcon, PopUpIcon, TrophyIcon, HeartFilledIcon, BookIcon, FilmIcon } from "@/components/icons";
+import { RocketIcon, TrophyIcon, HeartFilledIcon, BookIcon, FilmIcon, PopUpIcon } from "@/components/icons";
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {

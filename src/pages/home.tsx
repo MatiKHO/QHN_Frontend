@@ -60,31 +60,7 @@ const HomePage = () => {
 
   return (
     <DefaultLayout>
-      {/* Categorías + Botón */}
-      <section className="w-full flex flex-col items-center py-8 md:py-10 bg-white dark:bg-black z-10">
-        <div className="flex justify-around flex-wrap gap-4 w-full">
-          {siteConfig.categories.map((category) => {
-            const Icon = category.icon;
-            
-            return (
-              <Card
-                key={category.label}
-                isPressable
-                onPress={() => fetchEventsByTag(category.label)}
-                className="w-[150px] py-4 px-4 hover:scale-105 transition-transform duration-300 text-center whitespace-nowrap"
-                style={{backgroundColor: "#FFD66B"}}
-              >
-                <CardHeader className="pb-0 pt-2 px-4 flex-col items-center">
-                  <Icon className="h-6 mb-2 text-black" />
-                  <p className="top-1 flex-col !items-start m-1 font-medium text-black">
-                    {category.label}
-                  </p>
-                </CardHeader>
-              </Card>
-            );
-          })}
-        </div>
-
+      <section className="w-full flex flex-col items-center bg-white dark:bg-black z-10">
         {/* Botón para mostrar/ocultar el mapa */}
         <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-[1000]">
           <Card
@@ -165,8 +141,8 @@ const HomePage = () => {
       ) : (
         <>
           {/* Imagen principal */}
-          <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-            <Card className="col-span-12 sm:col-span-4 h-[600px] lg:h-full w-full border-none">
+          <section className="flex flex-col items-center justify-center gap-4 pb-20 md:py-10">
+            <Card className="col-span-12 sm:col-span-4 h-[600px] lg:h-[400px] w-full border-none">
               <CardHeader className="absolute z-10 top-1 flex-col !items-start m-4">
                 <p className={title({ color: "white" })}>La</p>
                 <p className={title({ color: "yellow" })}>imaginación</p>
@@ -186,9 +162,32 @@ const HomePage = () => {
             </Card>
           </section>
 
+          <div className="flex justify-around flex-wrap gap-4 w-full pb-20">
+          {siteConfig.categories.map((category) => {
+            const Icon = category.icon;
+            
+            return (
+              <Card
+                key={category.label}
+                isPressable
+                onPress={() => fetchEventsByTag(category.label)}
+                className="w-[150px] py-4 px-4 hover:scale-105 transition-transform duration-300 text-center whitespace-nowrap"
+                style={{backgroundColor: "#FFD66B"}}
+              >
+                <CardHeader className="pb-0 pt-2 px-4 flex-col items-center">
+                  <Icon className="h-6 mb-2 text-black" />
+                  <p className="top-1 flex-col !items-start m-1 font-medium text-black">
+                    {category.label}
+                  </p>
+                </CardHeader>
+              </Card>
+            );
+          })}
+        </div>
+
           {/* Eventos destacados */}
           <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-8">
-            <h2 className="text-3xl font-bold">Eventos destacados</h2>
+            <h2 className="text-3xl font-bold">Eventos populares</h2>
           </section>
 
           {/* Event Cards */}
@@ -197,9 +196,9 @@ const HomePage = () => {
               <Card
                 key={i}
                 isPressable
-                isFooterBlurred
-                className="py-4 px-4 hover:scale-105 transition-transform duration-300 text-black"
-                style={{backgroundColor: "#FFD66B"}}
+                className="py-4 px-4 hover:scale-105 transition-transform duration-300 text-black dark:text-white"
+                
+                
               >
                 <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
                   <p className="text-tiny uppercase font-bold">Daily Mix</p>

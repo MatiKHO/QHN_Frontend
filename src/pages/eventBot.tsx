@@ -88,11 +88,11 @@ export default function EventBot() {
               response && <p>{response}</p>
             )}
           </div>
-          {/* <div>
+          <div>
             {chatHistory.map((text, index) => (
               <span key={index}>{text}</span>
             ))}
-          </div> */}
+          </div>
         </Card>
       </section>
     </DefaultLayout>

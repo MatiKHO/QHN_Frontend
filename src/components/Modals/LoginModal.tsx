@@ -10,13 +10,24 @@ import { LockIcon, MailIcon } from "../icons";
 import { Checkbox } from "@heroui/checkbox";
 import { Button } from "@heroui/button";
 import { Link } from "@heroui/link";
+import { useAuth } from "@/context/AuthContext";
+import { useState } from "react";
 
 type LoginModalProps = {
     isOpen: boolean;
     onClose: () => void;
 }
 
-export const LoginModal = ({isOpen, onClose}:LoginModalProps) => {
+export const  LoginModal = ({isOpen, onClose}:LoginModalProps) => {
+  const { login } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    await login({ email, password });
+    onClose();
+  };
+
 
   return (
     <Modal
@@ -42,6 +53,7 @@ export const LoginModal = ({isOpen, onClose}:LoginModalProps) => {
                 label="Email"
                 placeholder="Introduce tu email"
                 variant="flat"
+                onChange={(e) => setEmail(e.target.value)}
               />
               <Input
                 endContent={
@@ -51,6 +63,7 @@ export const LoginModal = ({isOpen, onClose}:LoginModalProps) => {
                 placeholder="Introduce tu contraseña"
                 type="password"
                 variant="flat"
+                onChange={(e) => setPassword(e.target.value)}
               />
               <div className="flex py-2 px-1 justify-between">
                 <Checkbox
@@ -69,7 +82,7 @@ export const LoginModal = ({isOpen, onClose}:LoginModalProps) => {
               <Button color="danger" variant="flat" onPress={onClose}>
                 Cerrar
               </Button>
-              <Button color="primary" onPress={onClose}>
+              <Button color="primary" onPress={handleLogin}>
                 Continuar
               </Button>
             </ModalFooter>

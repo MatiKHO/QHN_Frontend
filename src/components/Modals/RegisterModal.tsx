@@ -11,6 +11,7 @@ import { useState } from "react";
 import { LockIcon, MailIcon, UserIcon } from "../icons";
 import { Button } from "@heroui/button";
 import { Link} from "@heroui/link";
+import { useAuth } from "@/context/AuthContext";
 
 type RegisterModalProps = {
   isOpen: boolean;
@@ -23,6 +24,7 @@ export const RegisterModal = ({
   isOpen,
   onClose,
 }: RegisterModalProps) => {
+  const { registerUser } = useAuth();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,12 +32,25 @@ export const RegisterModal = ({
   const [error, setError] = useState("");
   const [showLoginLink, setShowLoginLink] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
       setError("Las contraseñas no coinciden");
       return;
+    }
+
+    const userData = { fullName, email, password };
+    console.log(userData);
+    console.log("Intentando registrar usuario:", userData); // Log antes de llamar a la función de registro
+
+    try {
+      const result = await registerUser(userData);
+      console.log("Usuario registrado exitosamente:", result); // Log para verificar el resultado
+      onClose();
+      onOpenLoginModal();
+    } catch (error) {
+      setError("Error al registrar el usuario");
     }
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
@@ -137,7 +152,7 @@ export const RegisterModal = ({
               <Button color="danger" variant="flat" onPress={onClose}>
                 Cerrar
               </Button>
-              <Button type="submit" color="primary" onPress={onClose}>
+              <Button type="submit" color="primary" onPress={onClose} onSubmit={handleSubmit}>
                 Registrarse
               </Button>
               {error && (

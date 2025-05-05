@@ -11,6 +11,7 @@ import { Card, CardHeader, CardBody } from "@heroui/card";
 import { siteConfig } from "@/config/site";
 import { MapIcon } from "@/components/icons";
 
+
 type Evento = {
   event_id: string;
   name: string;
@@ -62,16 +63,18 @@ const HomePage = () => {
         <div className="flex justify-around flex-wrap gap-4 w-full">
           {siteConfig.categories.map((category) => {
             const Icon = category.icon;
+            
             return (
               <Card
                 key={category.label}
                 isPressable
                 onPress={() => fetchEventsByTag(category.label)}
                 className="w-[150px] py-4 px-4 hover:scale-105 transition-transform duration-300 text-center whitespace-nowrap"
+                style={{backgroundColor: "#FFD66B"}}
               >
                 <CardHeader className="pb-0 pt-2 px-4 flex-col items-center">
-                  <Icon className="h-6 mb-2" />
-                  <p className="top-1 flex-col !items-start m-1 font-medium">
+                  <Icon className="h-6 mb-2 text-black" />
+                  <p className="top-1 flex-col !items-start m-1 font-medium text-black">
                     {category.label}
                   </p>
                 </CardHeader>
@@ -85,7 +88,8 @@ const HomePage = () => {
           <Card
             isPressable
             onPress={() => setShowMap(!showMap)}
-            className="w-[150px] py-3 px-4 bg-black text-white dark:bg-white dark:text-black shadow-none hover:scale-105 transition-transform duration-300 text-center whitespace-nowrap"
+            className="w-[150px] py-3 px-4 bg-black text-black dark:bg-white shadow-none hover:scale-105 transition-transform duration-300 text-center whitespace-nowrap"
+            style={{backgroundColor: "#FFD66B"}}
           >
             <CardHeader className="flex flex-row items-center justify-center p-0">
               <span className="font-medium text-sm flex items-center gap-2">
@@ -163,7 +167,7 @@ const HomePage = () => {
             <Card className="col-span-12 sm:col-span-4 h-[600px] lg:h-full w-full border-none">
               <CardHeader className="absolute z-10 top-1 flex-col !items-start m-4">
                 <p className={title({ color: "white" })}>La</p>
-                <p className={title({ color: "orange" })}>imaginación</p>
+                <p className={title({ color: "yellow" })}>imaginación</p>
                 <p className={title({ color: "white" })}>de un niño</p>
                 <p className={title({ color: "white" })}>no tiene límites.</p>
                 <br />
@@ -192,11 +196,12 @@ const HomePage = () => {
                 key={i}
                 isPressable
                 isFooterBlurred
-                className="py-4 px-4 hover:scale-105 transition-transform duration-300"
+                className="py-4 px-4 hover:scale-105 transition-transform duration-300 text-black"
+                style={{backgroundColor: "#FFD66B"}}
               >
                 <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
                   <p className="text-tiny uppercase font-bold">Daily Mix</p>
-                  <small className="text-default-500">12 Tracks</small>
+                  <small>12 Tracks</small>
                   <h4 className="font-bold text-large">Frontend Radio</h4>
                 </CardHeader>
                 <CardBody className="overflow-visible py-2">

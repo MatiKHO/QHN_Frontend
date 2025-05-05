@@ -19,8 +19,8 @@ export const AvatarDropdown: React.FC<AvatarDropdownProps> = ({ onRegister, onLo
       <DropdownTrigger>
         <Avatar
           classNames={{
-            base: "bg-gradient-to-br from-[#FFB457] to-[#FF705B]",
-            icon: "text-black/80",
+            base: "bg-gradient-to-br from-[#FFD66B] to-[#FFD66B]",
+            icon: "text-black",
           }}
           icon={<AvatarIcon />}
           size="sm"

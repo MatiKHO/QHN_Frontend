@@ -1,33 +1,20 @@
 import DefaultLayout from "@/layouts/default";
+import { Avatar } from "@heroui/avatar";
+import { Card, CardHeader } from "@heroui/card";
 
 const Profile = () => {
-  const handleLogout = () => {
-    // Aquí pondremos la lógica de cerrar sesión
-  };
-
   return (
     <DefaultLayout>
-      <div className="flex min-h-[80vh] items-start justify-center pt-12 px-4">
-        <div className="w-full max-w-md space-y-8">
-          <div className="text-center">
-            <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white">
-              Mi Perfil
-            </h1>
-          </div>
-
-          <div className="flex justify-center">
-            <button
-              onClick={handleLogout}
-              className="mt-6 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-6 rounded transition"
-            >
-              Cerrar sesión
-            </button>
-          </div>
-        </div>
-      </div>
+      <Card className="flex min-h-[80vh] items-start justify-start pt-12 px-4">
+        <CardHeader>
+          <Avatar
+            className="w-20 h-20 text-large"
+            src="https://i.pravatar.cc/150?u=a04258114e29026302d"
+          />
+        </CardHeader>
+      </Card>
     </DefaultLayout>
   );
 };
 
 export default Profile;
-

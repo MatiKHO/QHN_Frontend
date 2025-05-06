@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: process.env.PORT ? parseInt(process.env.PORT) : 5173,
-    allowedHosts: ['qhn-frontend.onrender.com'],
+    allowedHosts: ['qhn-frontend.onrender.com', 'www.qhcn.online'],
   },
   plugins: [react(), tsconfigPaths()],
   

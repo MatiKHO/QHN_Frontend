@@ -5,12 +5,13 @@ export const title = tv({
   variants: {
     color: {
       violet: "from-[#FF1CF7] to-[#b249f8]",
-      yellow: "from-[#FFD66B] to-[#FFB457]",
+      yellow: "from-[#FFD66B] to-[#FFD66B]",
       blue: "from-[#6EC1E4] to-[#6EC1E4]",
       green: "from-[#6FEE8D] to-[#17c964]",
       pink: "from-[#FF72E1] to-[#F54C7A]",
       foreground: "dark:from-[#FFFFFF] dark:to-[#4B4B4B]",
       white: "from-[#FFFFFF] to-[#FFFFFF]",
+      black: "from-[#000000] to-[#000000]",
     },
     size: {
       sm: "text-3xl lg:text-4xl",

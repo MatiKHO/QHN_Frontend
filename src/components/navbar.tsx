@@ -23,6 +23,8 @@ import { RegisterModal } from "./Modals/RegisterModal";
 
 import { AvatarDropdown } from "./Dropdowns/AvatarDropdown";
 
+import { useAuth } from "@/context/AuthContext"; 
+
 
 
 export const Navbar = () => {
@@ -31,6 +33,9 @@ export const Navbar = () => {
   const openRegisterModal = () => setModalState({ register: true, login: false });
   const openLoginModal = () => setModalState({ register: false, login: true });
   const closeModals = () => setModalState({ register: false, login: false });
+
+  const { isAuthenticated } = useAuth();
+
 
 
   
@@ -105,7 +110,8 @@ export const Navbar = () => {
         <ThemeSwitch />
         <AvatarDropdown onRegister={openRegisterModal} onLogin={openLoginModal} />
       </NavbarContent>
-      <NavbarMenuToggle className="lg:hidden"/> 
+      {isAuthenticated && <NavbarMenuToggle className="lg:hidden" />}
+
 
 
       {/* Modals */}

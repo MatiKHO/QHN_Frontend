@@ -1,5 +1,7 @@
 import { tv } from "tailwind-variants";
 
+
+
 export const title = tv({
   base: "tracking-tight inline font-semibold",
   variants: {
@@ -55,6 +57,7 @@ export const subtitle = tv({
       pink: "from-[#FF72E1] to-[#F54C7A]",
       foreground: "dark:from-[#FFFFFF] dark:to-[#4B4B4B]",
       white: "from-[#FFFFFF] to-[#FFFFFF]",
+      black: "from-[#000000] to-[#000000]",
     }
   },
   defaultVariants: {
@@ -70,6 +73,7 @@ export const subtitle = tv({
         "pink",
         "foreground",
         "white",
+        "black",
       ],
       class: "bg-clip-text text-transparent bg-gradient-to-b",
     },

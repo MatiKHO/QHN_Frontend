@@ -10,6 +10,7 @@ import { Image } from "@heroui/image";
 import { Card, CardHeader, CardBody } from "@heroui/card";
 import { siteConfig } from "@/config/site";
 import { MapIcon } from "@/components/icons";
+import { Button } from "@heroui/button";
 
 
 type Evento = {
@@ -143,21 +144,18 @@ const HomePage = () => {
           {/* Imagen principal */}
           <section className="flex flex-col items-center justify-center gap-4 pb-20 md:py-10">
             <Card className="col-span-12 sm:col-span-4 h-[600px] lg:h-[400px] w-full border-none">
-              <CardHeader className="absolute z-10 top-1 flex-col !items-start m-4">
-                <p className={title({ color: "white" })}>La</p>
-                <p className={title({ color: "yellow" })}>imaginación</p>
-                <p className={title({ color: "white" })}>de un niño</p>
-                <p className={title({ color: "white" })}>no tiene límites.</p>
+              <CardHeader className="absolute z-10 top-10 flex-col !items-start m-4">
+                <p className={title({ color: "white" })}>Todos tus</p>
+                <p className={title({ color: "black" })}>eventos</p>
+                <p className={title({ color: "white" })}>a un solo click.</p>
                 <br />
-                <p className={title({ color: "white" })}>Nuestros</p>
-                <p className={title({ color: "blue" })}>eventos</p>
-                <p className={title({ color: "white" })}>tampoco.</p>
+                <Button style={{backgroundColor: "#FFD66B"}} variant="light" className="text-black font-semibold">Ir a eventos</Button>
               </CardHeader>
               <Image
                 removeWrapper
                 alt="HeroUI hero Image"
                 className="z-0 w-full h-full object-cover"
-                src="https://app.requestly.io/delay/200/https://heroui.com/images/hero-card-complete.jpeg"
+                src="https://app.requestly.io/delay/200/https://res.cloudinary.com/doll2vtjc/image/upload/v1746471258/mike-scheid-0iqkntLw93A-unsplash_ofjmel.jpg"
               />
             </Card>
           </section>
@@ -209,7 +207,7 @@ const HomePage = () => {
                   <Image
                     alt="Card background"
                     className="object-cover rounded-xl"
-                    src="https://app.requestly.io/delay/200/https://heroui.com/images/hero-card-complete.jpeg"
+                    src="https://app.requestly.io/delay/200/https://res.cloudinary.com/doll2vtjc/image/upload/v1746471258/mike-scheid-0iqkntLw93A-unsplash_ofjmel.jpg"
                     width={400}
                   />
                 </CardBody>

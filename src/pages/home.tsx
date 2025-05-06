@@ -23,6 +23,7 @@ type Evento = {
   url?: string;
   latitude: string;
   longitude: string;
+  image?: string;
 };
 
 const HomePage = () => {
@@ -76,6 +77,8 @@ const HomePage = () => {
   const indexOfFirst = indexOfLast - eventsPerPage;
   const currentFilteredEvents = filteredEvents.slice(indexOfFirst, indexOfLast);
   const totalPages = Math.ceil(filteredEvents.length / eventsPerPage);
+
+  const mapEvents = filteredEvents.length > 0 ? filteredEvents : events;
 
   return (
     <DefaultLayout>
@@ -163,8 +166,7 @@ const HomePage = () => {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-
-              {events
+              {mapEvents
                 .filter((e) => {
                   const lat = parseFloat(e.latitude);
                   const lng = parseFloat(e.longitude);
@@ -205,7 +207,9 @@ const HomePage = () => {
           </div>
         </section>
       )}
-      {filteredEvents.length > 0 && (
+
+      {/* Eventos filtrados */}
+      {filteredEvents.length > 0 && !showMap && (
         <section className="flex flex-col items-center justify-center py-8">
           <h2 className="text-2xl font-semibold mb-4">Eventos filtrados</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-6xl">
@@ -226,7 +230,7 @@ const HomePage = () => {
                     <Image
                       alt={evento.name}
                       className="object-cover rounded-xl"
-                      src="https://heroui.com/images/hero-card-complete.jpeg"
+                      src={evento.image || "https://heroui.com/images/hero-card-complete.jpeg"}
                       width={400}
                     />
                   </CardBody>
@@ -237,14 +241,12 @@ const HomePage = () => {
           {/* Pagination */}
           <div className="mt-6">
             <Pagination
-            
               total={totalPages}
               page={currentPage}
               onChange={setCurrentPage}
               showControls
               showShadow
               variant="light"
-              
             />
           </div>
         </section>
@@ -274,7 +276,7 @@ const HomePage = () => {
                 <Image
                   alt={evento.name}
                   className="object-cover rounded-xl"
-                  src="https://app.requestly.io/delay/200/https://res.cloudinary.com/doll2vtjc/image/upload/v1746471258/mike-scheid-0iqkntLw93A-unsplash_ofjmel.jpg"
+                  src={evento.image || "https://heroui.com/images/hero-card-complete.jpeg"}
                   width={400}
                 />
               </CardBody>
@@ -287,3 +289,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+

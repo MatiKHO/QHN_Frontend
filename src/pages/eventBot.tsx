@@ -98,6 +98,8 @@ export default function EventBot() {
     });
   };
   
+  
+  
 
   const sendPrompt = async () => {
     console.log(response);
@@ -109,7 +111,7 @@ export default function EventBot() {
         
       ]);
       setPrompt("");
-      const response = await fetch("/api/chat/generate", {
+      const response = await fetch("https://www.qhcn.online/api/chat/generate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

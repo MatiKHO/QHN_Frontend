@@ -1,5 +1,5 @@
 import { Link } from "@heroui/link";
-import { Input } from "@heroui/input";
+// import { Input } from "@heroui/input";
 import {
   Navbar as HeroUINavbar,
   NavbarBrand,
@@ -14,7 +14,7 @@ import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
-import { SearchIcon } from "@/components/icons";
+// import { SearchIcon } from "@/components/icons";
 import { Logo } from "@/components/icons";
 
 
@@ -34,22 +34,22 @@ export const Navbar = () => {
   const openLoginModal = () => setModalState({ register: false, login: true });
   const closeModals = () => setModalState({ register: false, login: false });
 
-  const searchInput = (
-    <Input
-      aria-label="Search"
-      classNames={{
-        inputWrapper: "bg-default-100",
-        input: "text-sm", 
-      }}
-      labelPlacement="outside"
-      placeholder="Buscar..."
-      startContent={
-        <SearchIcon style={{color: "#FFD66B"}} className="text-base text-default-400 pointer-events-none flex-shrink-0" /> 
-      }
-      type="search"
+  // const searchInput = (
+  //   <Input
+  //     aria-label="Search"
+  //     classNames={{
+  //       inputWrapper: "bg-default-100",
+  //       input: "text-sm", 
+  //     }}
+  //     labelPlacement="outside"
+  //     placeholder="Buscar..."
+  //     startContent={
+  //       <SearchIcon style={{color: "#FFD66B"}} className="text-base text-default-400 pointer-events-none flex-shrink-0" /> 
+  //     }
+  //     type="search"
       
-    />
-  );
+  //   />
+  // );
   
 
   return (
@@ -89,7 +89,7 @@ export const Navbar = () => {
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
       >
-        <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
+        {/* <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem> */}
       </NavbarContent>
 
       {/* Desktop Avatar Dropdown */}
@@ -102,7 +102,7 @@ export const Navbar = () => {
 
       {/* Mobile Menu */}
       <NavbarMenu>
-        {searchInput}
+        {/* {searchInput} */}
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>

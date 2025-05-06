@@ -31,6 +31,10 @@ export const siteConfig = {
       label: "Sobre nosotros",
       href: "/about",
     },
+    {
+      label: "Cerrar sesión",
+      href: "/",
+    },
     
   ],
   categories: [

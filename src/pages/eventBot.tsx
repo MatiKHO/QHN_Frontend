@@ -14,6 +14,8 @@ export default function EventBot() {
     { sender: "user" | "bot"; message: string }[]
   >([]);
   
+const API_BASE = import.meta.env.VITE_BACKEND_URL;
+
   const bgColor = "#FFD66B";
 
   const formatBotMessage = (message: string): JSX.Element[] => {
@@ -102,6 +104,7 @@ export default function EventBot() {
   
 
   const sendPrompt = async () => {
+    console.log(response);
     try {
       setIsLoading(true);
       setChatHistory((prevHistory) => [
@@ -110,7 +113,7 @@ export default function EventBot() {
         
       ]);
       setPrompt("");
-      const response = await fetch("http://localhost:3000/api/chat/generate", {
+      const response = await fetch(`${API_BASE}/api/chat/generate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

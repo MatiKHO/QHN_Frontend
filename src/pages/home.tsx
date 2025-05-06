@@ -23,7 +23,11 @@ type Evento = {
   url?: string;
   latitude: string;
   longitude: string;
+
   image?: string;
+
+  tags: string;
+
 };
 
 const HomePage = () => {
@@ -109,6 +113,7 @@ const HomePage = () => {
 
       {/* Categorías */}
       <section className="w-full flex flex-col items-center py-8 md:py-10 bg-white dark:bg-black z-10">
+      <h2 className="text-2xl font-semibold mb-4">Categorías</h2>
         <div className="flex justify-around flex-wrap gap-4 w-full">
           {siteConfig.categories.map((category) => {
             const Icon = category.icon;
@@ -223,7 +228,7 @@ const HomePage = () => {
               >
                 <Card className="bg-white text-black hover:scale-105 transition-transform duration-300">
                   <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                    <p className="text-tiny uppercase font-bold">Evento</p>
+                    <p className="text-tiny uppercase font-bold">{evento.tags}</p>
                     <h4 className="font-bold text-large">{evento.name}</h4>
                   </CardHeader>
                   <CardBody className="overflow-visible py-2">

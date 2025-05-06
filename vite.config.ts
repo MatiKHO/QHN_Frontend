@@ -10,5 +10,6 @@ export default defineConfig({
     allowedHosts: ['qhn-frontend.onrender.com', 'www.qhcn.online'],
   },
   plugins: [react(), tsconfigPaths()],
+  envPrefix:'VITE_',
   
 })

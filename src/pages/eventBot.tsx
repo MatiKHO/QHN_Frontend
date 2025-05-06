@@ -8,7 +8,7 @@ import {ScrollShadow} from "@heroui/scroll-shadow";
 
 export default function EventBot() {
   const [prompt, setPrompt] = useState("");
-  // const [response, setResponse] = useState("");
+  const [response, setResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [chatHistory, setChatHistory] = useState<
     { sender: "user" | "bot"; message: string }[]
@@ -98,10 +98,9 @@ export default function EventBot() {
     });
   };
   
-  
-  
 
   const sendPrompt = async () => {
+    console.log(response);
     try {
       setIsLoading(true);
       setChatHistory((prevHistory) => [
@@ -110,7 +109,7 @@ export default function EventBot() {
         
       ]);
       setPrompt("");
-      const response = await fetch("http://localhost:3000/api/chat/generate", {
+      const response = await fetch("/api/chat/generate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -123,7 +122,7 @@ export default function EventBot() {
       }
 
       const data = await response.json();
-      // setResponse(data.response);
+      setResponse(data.response);
       setChatHistory((prevHistory) => [
         ...prevHistory,
         { sender: "bot", message: data.response },

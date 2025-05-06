@@ -64,6 +64,9 @@ export const RegisterModal = ({
     }
   };
 
+  const bgColor = "#FFD66B";
+
+
   
 
   return (
@@ -152,7 +155,7 @@ export const RegisterModal = ({
               <Button color="danger" variant="flat" onPress={onClose}>
                 Cerrar
               </Button>
-              <Button type="submit" color="primary"  >
+              <Button type="submit" style={{backgroundColor: bgColor}}  >
                 Registrarse
               </Button>
               {error && (

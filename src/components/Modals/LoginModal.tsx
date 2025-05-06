@@ -23,6 +23,9 @@ export const  LoginModal = ({isOpen, onClose}:LoginModalProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const bgColor = "#FFD66B";
+
+
   const handleLogin = async () => {
     await login({ email, password });
     onClose();
@@ -82,7 +85,7 @@ export const  LoginModal = ({isOpen, onClose}:LoginModalProps) => {
               <Button color="danger" variant="flat" onPress={onClose}>
                 Cerrar
               </Button>
-              <Button color="primary" onPress={handleLogin}>
+              <Button style={{backgroundColor: bgColor}} onPress={handleLogin}>
                 Continuar
               </Button>
             </ModalFooter>

@@ -75,27 +75,29 @@ const HomePage = () => {
 
   return (
     <DefaultLayout>
+
       {/* Imagen principal */}
-      <section className="relative w-full flex justify-center z-20">
-        <Card className="h-[500px] w-full border-none">
-          <CardHeader className="absolute z-10 top-1 flex-col !items-start m-4">
-            <p className={title({ color: "white" })}>La</p>
-            <p className={title({ color: "yellow" })}>imaginación</p>
-            <p className={title({ color: "white" })}>de un niño</p>
-            <p className={title({ color: "white" })}>no tiene límites.</p>
-            <br />
-            <p className={title({ color: "white" })}>Nuestros</p>
-            <p className={title({ color: "blue" })}>eventos</p>
-            <p className={title({ color: "white" })}>tampoco.</p>
-          </CardHeader>
-          <Image
-            removeWrapper
-            alt="HeroUI hero Image"
-            className="z-0 w-full h-[500px] object-cover"
-            src="https://app.requestly.io/delay/200/https://heroui.com/images/hero-card-complete.jpeg"
-          />
-        </Card>
-      </section>
+      <section className="flex flex-col items-center justify-center gap-4 pb-20 md:py-10">
+            <Card className="col-span-12 sm:col-span-4 h-[600px] lg:h-[400px] w-full border-none">
+              <CardHeader className="absolute z-10 top-10 flex-col !items-start m-4">
+                <p className={title({ color: "white" })}>Todos tus</p>
+                <p className={title({ color: "black" })}>eventos</p>
+                <p className={title({ color: "white" })}>a un solo click</p>
+              </CardHeader>
+              <CardFooter className="absolute z-10 bottom-20 flex-col !items-baseline m-5">
+              <Button style={{backgroundColor: "#FED76A"}} className="text-black"  >Ir a eventos</Button>
+              </CardFooter >
+
+              
+              <Image
+              
+                removeWrapper
+                alt="Family image"
+                className="z-0 w-full h-full object-cover"
+                src="https://app.requestly.io/delay/200/https://res.cloudinary.com/doll2vtjc/image/upload/v1746471258/mike-scheid-0iqkntLw93A-unsplash_ofjmel.jpg"
+              />
+            </Card>
+          </section>
 
       {/* Categorías */}
       <section className="w-full flex flex-col items-center py-8 md:py-10 bg-white dark:bg-black z-10">
@@ -120,6 +122,10 @@ const HomePage = () => {
         </div>
 
         {/* Botón Mapa */}
+
+      <section className="w-full flex flex-col items-center bg-white dark:bg-black z-10">
+        {/* Botón para mostrar/ocultar el mapa */}
+
         <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-[1000]">
           <Card
             isPressable
@@ -170,6 +176,7 @@ const HomePage = () => {
               key={e.event_id}
               position={[parseFloat(e.latitude), parseFloat(e.longitude)]}
             >
+
               <Popup>
                 <div className="space-y-1">
                   <p className="font-semibold">{e.name}</p>
@@ -205,6 +212,111 @@ const HomePage = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block"
+
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+
+              {events
+                .filter(
+                  (evento) =>
+                    evento.latitude &&
+                    evento.longitude &&
+                    !isNaN(parseFloat(evento.latitude)) &&
+                    !isNaN(parseFloat(evento.longitude))
+                )
+
+                .map((evento) => (
+                  <Marker
+                    key={evento.event_id}
+                    position={[
+                      parseFloat(evento.latitude),
+                      parseFloat(evento.longitude),
+                    ]}
+                  >
+                    <Popup>
+                      <div className="space-y-1">
+                        <p className="font-semibold">{evento.name}</p>
+                        {evento.url && (
+                          <a
+                            href={evento.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 underline"
+                          >
+                            Ver evento
+                          </a>
+                        )}
+                      </div>
+                    </Popup>
+                  </Marker>
+                ))}
+            </LeafletMap>
+          </div>
+        </section>
+      ) : (
+        <>
+          {/* Imagen principal */}
+          <section className="flex flex-col items-center justify-center gap-4 pb-20 md:py-10">
+            <Card className="col-span-12 sm:col-span-4 h-[600px] lg:h-[400px] w-full border-none">
+              <CardHeader className="absolute z-10 top-1 flex-col !items-start m-4">
+                <p className={title({ color: "white" })}>La</p>
+                <p className={title({ color: "yellow" })}>imaginación</p>
+                <p className={title({ color: "white" })}>de un niño</p>
+                <p className={title({ color: "white" })}>no tiene límites.</p>
+                <br />
+                <p className={title({ color: "white" })}>Nuestros</p>
+                <p className={title({ color: "blue" })}>eventos</p>
+                <p className={title({ color: "white" })}>tampoco.</p>
+              </CardHeader>
+              <Image
+                removeWrapper
+                alt="HeroUI hero Image"
+                className="z-0 w-full h-full object-cover"
+                src="https://app.requestly.io/delay/200/https://heroui.com/images/hero-card-complete.jpeg"
+              />
+            </Card>
+          </section>
+
+          <div className="flex justify-around flex-wrap gap-4 w-full pb-20">
+          {siteConfig.categories.map((category) => {
+            const Icon = category.icon;
+            
+            return (
+              <Card
+                key={category.label}
+                isPressable
+                onPress={() => fetchEventsByTag(category.label)}
+                className="w-[150px] py-4 px-4 hover:scale-105 transition-transform duration-300 text-center whitespace-nowrap"
+                style={{backgroundColor: "#FFD66B"}}
+              >
+                <CardHeader className="pb-0 pt-2 px-4 flex-col items-center">
+                  <Icon className="h-6 mb-2 text-black" />
+                  <p className="top-1 flex-col !items-start m-1 font-medium text-black">
+                    {category.label}
+                  </p>
+                </CardHeader>
+              </Card>
+            );
+          })}
+        </div>
+
+          {/* Eventos destacados */}
+          <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-8">
+            <h2 className="text-3xl font-bold">Eventos populares</h2>
+          </section>
+
+          {/* Event Cards */}
+          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 py-8 md:py-10">
+            {[1, 2, 3].map((_, i) => (
+              <Card
+                key={i}
+                isPressable
+                className="py-4 px-4 hover:scale-105 transition-transform duration-300 text-black dark:text-white"
+                
+                
+
               >
                 <Card className="bg-white text-black hover:scale-105 transition-transform duration-300">
                   <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">

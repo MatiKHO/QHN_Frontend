@@ -229,7 +229,7 @@ const HomePage = () => {
               >
                 <Card className="bg-white text-black hover:scale-105 transition-transform duration-300 line-clamp-1">
                   <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                    <Chip className="text-tiny uppercase font-light" style={{backgroundColor: bgColor}}>{evento.tags}</Chip>
+                    <Chip size="sm" radius="sm" variant="flat" className="text-tiny uppercase font-light" style={{backgroundColor: bgColor}}>{evento.tags}</Chip>
                     <h4 className="font-bold text-large">{evento.name}</h4>
                   </CardHeader>
                   <CardBody className="overflow-visible py-2">
@@ -271,9 +271,9 @@ const HomePage = () => {
             rel="noopener noreferrer"
             className="block"
           >
-            <Card className="bg-white text-black hover:scale-105 transition-transform duration-300 line-clamp-1">
-              <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                <Chip className="text-tiny uppercase font-bold" style={{backgroundColor: bgColor}}>
+            <Card className="bg-white text-black hover:scale-105 transition-transform duration-300 line-clamp-1 ">
+              <CardHeader className="pb-0 pt-2 px-4 flex-col items-start " >
+                <Chip size="sm" radius="sm" variant="flat"  className="text-tiny uppercase font-bold" style={{backgroundColor: bgColor}}>
                   Evento destacado
                 </Chip>
                 <h4 className="font-bold text-large">{evento.name}</h4>

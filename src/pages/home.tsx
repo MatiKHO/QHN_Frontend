@@ -16,6 +16,7 @@ import { siteConfig } from "@/config/site";
 import { MapIcon } from "@/components/icons";
 import { Button } from "@heroui/button";
 import { Pagination } from "@heroui/pagination";
+import { Chip } from "@heroui/chip";
 
 type Evento = {
   event_id: string;
@@ -216,7 +217,7 @@ const HomePage = () => {
       {/* Eventos filtrados */}
       {filteredEvents.length > 0 && !showMap && (
         <section className="flex flex-col items-center justify-center py-8">
-          <h2 className="text-2xl font-semibold mb-4">Eventos filtrados</h2>
+          <h2 className="text-2xl font-semibold mb-4">Eventos Filtrados</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-6xl">
             {currentFilteredEvents.map((evento) => (
               <a
@@ -226,9 +227,9 @@ const HomePage = () => {
                 rel="noopener noreferrer"
                 className="block"
               >
-                <Card className="bg-white text-black hover:scale-105 transition-transform duration-300">
+                <Card className="bg-white text-black hover:scale-105 transition-transform duration-300 line-clamp-1">
                   <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                    <p className="text-tiny uppercase font-bold">{evento.tags}</p>
+                    <Chip className="text-tiny uppercase font-light" style={{backgroundColor: bgColor}}>{evento.tags}</Chip>
                     <h4 className="font-bold text-large">{evento.name}</h4>
                   </CardHeader>
                   <CardBody className="overflow-visible py-2">
@@ -259,7 +260,7 @@ const HomePage = () => {
 
       {/* Eventos destacados */}
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-8">
-        <h2 className="text-3xl font-bold">Eventos populares</h2>
+        <h2 className="text-3xl font-bold">Eventos Populares</h2>
       </section>
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 py-8 md:py-10">
         {featuredEvents.map((evento) => (
@@ -270,11 +271,11 @@ const HomePage = () => {
             rel="noopener noreferrer"
             className="block"
           >
-            <Card className="bg-white text-black hover:scale-105 transition-transform duration-300">
+            <Card className="bg-white text-black hover:scale-105 transition-transform duration-300 line-clamp-1">
               <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                <p className="text-tiny uppercase font-bold">
+                <Chip className="text-tiny uppercase font-bold" style={{backgroundColor: bgColor}}>
                   Evento destacado
-                </p>
+                </Chip>
                 <h4 className="font-bold text-large">{evento.name}</h4>
               </CardHeader>
               <CardBody className="overflow-visible py-2">

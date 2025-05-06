@@ -6,7 +6,10 @@ interface AuthContextType {
   registerUser: (userData: { fullName: string; email: string; password: string }) => Promise<boolean>;
   login: (credentials: { email: string; password: string }) => Promise<void>;
   logout: () => void;
+
 }
+
+const API_BASE = import.meta.env.VITE_BACKEND_URL;
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -20,7 +23,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const registerUser = async (userData: { fullName: string; email: string; password: string }) => {
-    const response = await fetch("https://www.qhcn.online/api/users/register", {
+    const response = await fetch(`${API_BASE}/api/users/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +42,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const login = async (credentials: { email: string; password: string }) => {
     try {
-      const response = await fetch("https://www.qhcn.online/api/users/login", {
+      const response = await fetch(`${API_BASE}/api/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

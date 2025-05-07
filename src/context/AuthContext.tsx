@@ -1,9 +1,16 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+type UserRegisterData = {
+  fullName: string;
+  email: string;
+  password: string;
+  age: number;
+};
+
 interface AuthContextType {
   isAuthenticated: boolean;
-  registerUser: (userData: { fullName: string; email: string; password: string }) => Promise<boolean>;
+  registerUser: (userData: UserRegisterData) => Promise<boolean>;
   login: (credentials: { email: string; password: string }) => Promise<void>;
   logout: () => void;
 
@@ -22,7 +29,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setIsAuthenticated(!!token);
   }, []);
 
-  const registerUser = async (userData: { fullName: string; email: string; password: string }) => {
+  const registerUser = async (userData: { fullName: string; email: string; password: string; age: number  }) => {
     const response = await fetch(`${API_BASE}/api/users/register`, {
       method: "POST",
       headers: {

@@ -28,6 +28,7 @@ export const RegisterModal = ({
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [age, setAge] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [showLoginLink, setShowLoginLink] = useState(false);
@@ -36,7 +37,6 @@ export const RegisterModal = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
   
-    // Validate passwords
     if (password !== confirmPassword) {
       setError("Las contraseñas no coinciden");
       return;
@@ -50,15 +50,15 @@ export const RegisterModal = ({
       return;
     }
   
-    setError(""); // Clear previous errors
+    setError(""); 
   
-    const userData = { fullName, email, password };
+    const userData = { fullName, email, password, age: parseInt(age, 10) };
   
     try {
       const result = await registerUser(userData);
       console.log("Usuario registrado exitosamente:", result);
-      onClose(); // Close the modal
-      onOpenLoginModal(); // Open the login modal
+      onClose(); 
+      onOpenLoginModal();
     } catch (error: any) {
       setError(error.message || "Error al registrar el usuario");
     }
@@ -96,6 +96,15 @@ export const RegisterModal = ({
                 endContent={<UserIcon />}
                 label="Nombre completo"
                 placeholder="Introduce tu nombre completo"
+                variant="flat"
+              ></Input>
+              <Input
+                type="text"
+                value={age}
+                onChange={(e) => setAge(e.target.value)}
+                required
+                label="Edad"
+                placeholder="Introduce tu edad"
                 variant="flat"
               ></Input>
               <Input

@@ -11,9 +11,11 @@ type UserRegisterData = {
 
 interface AuthContextType {
   isAuthenticated: boolean;
+  user: { fullName: string; email: string; age: number } | null;
   registerUser: (userData: UserRegisterData) => Promise<boolean>;
   login: (credentials: { email: string; password: string }) => Promise<void>;
   logout: () => void;
+  loading: boolean;
 
 }
 
@@ -23,12 +25,43 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState<{ fullName: string; email: string; age: number } | null>(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const storedUser = localStorage.getItem("user");
+
     setIsAuthenticated(!!token);
+    if (storedUser) {
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch (error) {
+        console.error("Error al parsear el usuario desde localStorage", error);
+        localStorage.removeItem("user"); 
+      }
+    }
+    setLoading(false);
   }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const storedUser = localStorage.getItem("user");
+
+    if (token && storedUser) {
+      setIsAuthenticated(true);
+      setUser(JSON.parse(storedUser));
+    } else {
+      setIsAuthenticated(false);
+    }
+
+    setLoading(false); 
+  }, []);
+
+
+  
+  
 
   const registerUser = async (userData: (UserRegisterData)) => {
     const response = await fetch(`${API_BASE}/api/users/register`, {
@@ -63,10 +96,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       });
 
       const data = await response.json();
+      console.log("Respuesta del servidor:", data);
       if (response.ok) {
         localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        setUser(data.user);
         setIsAuthenticated(true);
-        navigate("/profile");
+        navigate("/");
       } else {
         console.error("Error logging in:", data.error);
       }
@@ -75,14 +111,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null);
     setIsAuthenticated(false);
     navigate("/");
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, registerUser, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, registerUser, login, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );

@@ -10,7 +10,7 @@ export const siteConfig = {
       href: "/",
     },
     {
-      label: "EventBot",
+      label: "Eventbot",
       href: "/event-bot",
     },
     {

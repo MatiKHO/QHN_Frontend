@@ -17,6 +17,7 @@ import { MapIcon } from "@/components/icons";
 import { Button } from "@heroui/button";
 import { Pagination } from "@heroui/pagination";
 import { Chip } from "@heroui/chip";
+import { useNavigate } from "react-router-dom";
 
 type Evento = {
   event_id: string;
@@ -37,6 +38,8 @@ const HomePage = () => {
   const [featuredEvents, setFeaturedEvents] = useState<Evento[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<Evento[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate();
+
   const eventsPerPage = 6;
   const bgColor = "#FFD66B";
 
@@ -99,8 +102,9 @@ const HomePage = () => {
               style={{ backgroundColor: bgColor }}
               variant="light"
               className="text-black font-semibold"
+              onPress={() => navigate("/event-bot") }
             >
-              Ir a eventos
+            Prueba Eventbot
             </Button>
           </CardHeader>
           <Image
@@ -260,7 +264,7 @@ const HomePage = () => {
 
       {/* Eventos destacados */}
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-8">
-        <h2 className="text-3xl font-bold">Eventos Populares</h2>
+        <h2 className="text-2xl font-semibold">Eventos Populares</h2>
       </section>
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 py-8 md:py-10">
         {featuredEvents.map((evento) => (
@@ -271,14 +275,14 @@ const HomePage = () => {
             rel="noopener noreferrer"
             className="block"
           >
-            <Card className="bg-white text-black hover:scale-105 transition-transform duration-300 line-clamp-1 ">
+            <Card className="h-[400px] flex flex-col justify-between bg-white text-black hover:scale-105 transition-transform duration-300 line-clamp-1 ">
               <CardHeader className="pb-0 pt-2 px-4 flex-col items-start " >
                 <Chip size="sm" radius="sm" variant="flat"  className="text-tiny uppercase font-bold" style={{backgroundColor: bgColor}}>
                   Evento destacado
                 </Chip>
-                <h4 className="font-bold text-large">{evento.name}</h4>
+                <h4 className="font-bold text-large ">{evento.name}</h4>
               </CardHeader>
-              <CardBody className="overflow-visible py-2">
+              <CardBody className="overflow-visible py-2 ">
                 <Image
                   alt={evento.name}
                   className="object-cover rounded-xl"

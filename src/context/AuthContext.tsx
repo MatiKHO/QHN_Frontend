@@ -6,9 +6,6 @@ type UserRegisterData = {
   email: string;
   password: string;
   age: number;
-  childrenAges?: string | null;
-  numberChildren?: number | null;
-  genderChildren?: string | null;
   location?: string | null;
 };
 
@@ -41,8 +38,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       },
       body: JSON.stringify({
         ...userData,
-      numberChildren: userData.numberChildren ?? null,
-      genderChildren: userData.genderChildren ?? null,
       location: userData.location ?? null,
       }),
       

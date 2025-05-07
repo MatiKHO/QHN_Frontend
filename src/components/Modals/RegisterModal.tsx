@@ -52,9 +52,7 @@ export const RegisterModal = ({
   
     setError(""); 
   
-    const userData = { fullName, email, password, age: parseInt(age, 10), 
-      numberChildren: null,
-      genderChildren: null, };
+    const userData = { fullName, email, password, age: parseInt(age, 10)};
   
     try {
       const result = await registerUser(userData);

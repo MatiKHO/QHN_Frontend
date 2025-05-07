@@ -9,7 +9,7 @@ export default function AboutPage() {
         <div className="inline-block max-w-lg text-center justify-center">
           <h1 className={title()}>¿Quiénes somos?</h1>
         </div>
-        <div className="flex flex-col gap-8 mb-4">
+        <div className="flex flex-col gap-10 mb-4">
           <Card isPressable className="w-full h-full flex flex-col justify-between bg-white text-black hover:scale-105 transition-transform duration-300 ">
             <CardHeader  className="pt-2 px-4 flex-col items-start">
               <h1 className={subtitle()} style={{color: "#FF993A"}}>

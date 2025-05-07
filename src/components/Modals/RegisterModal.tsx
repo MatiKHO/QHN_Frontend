@@ -52,7 +52,9 @@ export const RegisterModal = ({
   
     setError(""); 
   
-    const userData = { fullName, email, password, age: parseInt(age, 10) };
+    const userData = { fullName, email, password, age: parseInt(age, 10), childrenAges: null,
+      numberChildren: null,
+      genderChildren: null, };
   
     try {
       const result = await registerUser(userData);
@@ -101,7 +103,10 @@ export const RegisterModal = ({
               <Input
                 type="text"
                 value={age}
-                onChange={(e) => setAge(e.target.value)}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (/^\d*$/.test(value)) setAge(value);
+                }}
                 required
                 label="Edad"
                 placeholder="Introduce tu edad"

@@ -6,6 +6,9 @@ type UserRegisterData = {
   email: string;
   password: string;
   age: number;
+  childrenAges?: string | null;
+  numberChildren?: number | null;
+  genderChildren?: string | null;
 };
 
 interface AuthContextType {
@@ -29,13 +32,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setIsAuthenticated(!!token);
   }, []);
 
-  const registerUser = async (userData: { fullName: string; email: string; password: string; age: number  }) => {
+  const registerUser = async (userData: (UserRegisterData)) => {
     const response = await fetch(`${API_BASE}/api/users/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(userData),
+      body: JSON.stringify({
+        ...userData,
+        childrenAges: userData.childrenAges ?? null,
+      numberChildren: userData.numberChildren ?? null,
+      genderChildren: userData.genderChildren ?? null,
+      }),
+      
     });
   
     const data = await response.json();

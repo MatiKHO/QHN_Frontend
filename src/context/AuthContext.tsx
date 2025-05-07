@@ -9,6 +9,7 @@ type UserRegisterData = {
   childrenAges?: string | null;
   numberChildren?: number | null;
   genderChildren?: string | null;
+  location?: string | null;
 };
 
 interface AuthContextType {
@@ -43,6 +44,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         childrenAges: userData.childrenAges ?? null,
       numberChildren: userData.numberChildren ?? null,
       genderChildren: userData.genderChildren ?? null,
+      location: userData.location ?? null,
       }),
       
     });

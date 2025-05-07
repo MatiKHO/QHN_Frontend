@@ -41,7 +41,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       },
       body: JSON.stringify({
         ...userData,
-        childrenAges: userData.childrenAges ?? null,
       numberChildren: userData.numberChildren ?? null,
       genderChildren: userData.genderChildren ?? null,
       location: userData.location ?? null,

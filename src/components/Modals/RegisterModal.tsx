@@ -52,7 +52,7 @@ export const RegisterModal = ({
   
     setError(""); 
   
-    const userData = { fullName, email, password, age: parseInt(age, 10), childrenAges: null,
+    const userData = { fullName, email, password, age: parseInt(age, 10), 
       numberChildren: null,
       genderChildren: null, };
   

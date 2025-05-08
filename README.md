@@ -1,50 +1,53 @@
-# Vite & HeroUI Template
+# Proyecto QHCLN
 
-This is a template for creating applications using Vite and HeroUI (v2).
+Este es un proyecto realizado por el Grupo 3 del Desafío de Tripulaciones de The Bridge para la marca **Qué hacer con los niños**. 
+
+Se trata de un trabajo grupal y una propuesta de App Web SPA, Responsive e Integración de Inteligencia Artificial en forma de Chat Bot, especializado en eventos para familias. 
 
 [Try it on CodeSandbox](https://githubbox.com/frontio-ai/vite-template)
 
-## Technologies Used
+## Technologías usadas
 
 - [Vite](https://vitejs.dev/guide/)
+- [React](https://react.dev/)
 - [HeroUI](https://heroui.com)
 - [Tailwind CSS](https://tailwindcss.com)
 - [Tailwind Variants](https://tailwind-variants.org)
 - [TypeScript](https://www.typescriptlang.org)
 - [Framer Motion](https://www.framer.com/motion)
 
-## How to Use
+## Cómo usarlo
 
-To clone the project, run the following command:
+Para clonar el proyecto, utiliza el siguiente comando:
 
 ```bash
 git clone https://github.com/frontio-ai/vite-template.git
 ```
 
-### Install dependencies
+### Instalación de dependencias
 
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+Puedes usar cualquiera de ellos `npm`, `yarn`, `pnpm`, `bun`, Ejemplo usando `npm`:
 
 ```bash
 npm install
 ```
 
-### Run the development server
+### Para ejecutar la aplicación
 
 ```bash
 npm run dev
 ```
 
-### Setup pnpm (optional)
+### Setup pnpm (opcional)
 
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
+Si estás usando `pnpm`, añade el archivo `.npmrc`:
 
 ```bash
 public-hoist-pattern[]=*@heroui/*
 ```
 
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
+Después de modificar el archivo `.npmrc`, ejecuta `pnpm install` otra vez para asegurarte de que se han instalado correctamente todas las dependencias.
 
-## License
+## Licencia de uso
 
-Licensed under the [MIT license](https://github.com/frontio-ai/vite-template/blob/main/LICENSE).
+La licencia de uso está protegida bajo: [MIT license](https://github.com/frontio-ai/vite-template/blob/main/LICENSE).

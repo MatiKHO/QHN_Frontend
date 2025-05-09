@@ -4,7 +4,8 @@ Este es el repositorio del "Frontend" del proyecto realizado por el Grupo 3 del 
 
 Se trata de un trabajo grupal y una propuesta de App Web SPA, Responsive e Integración de Inteligencia Artificial en forma de Chat Bot, especializado en eventos para familias. 
 
-[Try it on CodeSandbox](https://githubbox.com/frontio-ai/vite-template)
+
+
 
 ## Technologías usadas
 
@@ -15,6 +16,7 @@ Se trata de un trabajo grupal y una propuesta de App Web SPA, Responsive e Integ
 - [Tailwind Variants](https://tailwind-variants.org)
 - [TypeScript](https://www.typescriptlang.org)
 - [Framer Motion](https://www.framer.com/motion)
+- [ReactLeafLet.js](https://react-leaflet.js.org/)
 
 ## Cómo usarlo
 

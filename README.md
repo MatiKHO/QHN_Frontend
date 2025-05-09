@@ -1,6 +1,6 @@
 # Proyecto QHCLN
 
-Este es un proyecto realizado por el Grupo 3 del Desafío de Tripulaciones de The Bridge para la marca **Qué hacer con los niños**. 
+Este es el repositorio del "Frontend" del proyecto realizado por el Grupo 3 del Desafío de Tripulaciones de The Bridge para la marca **Qué hacer con los niños**. 
 
 Se trata de un trabajo grupal y una propuesta de App Web SPA, Responsive e Integración de Inteligencia Artificial en forma de Chat Bot, especializado en eventos para familias. 
 

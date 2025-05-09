@@ -21,7 +21,7 @@ Se trata de un trabajo grupal y una propuesta de App Web SPA, Responsive e Integ
 Para clonar el proyecto, utiliza el siguiente comando:
 
 ```bash
-git clone https://github.com/frontio-ai/vite-template.git
+ git clone https://github.com/MatiKHO/QHN_Frontend
 ```
 
 ### Instalación de dependencias
@@ -50,4 +50,4 @@ Después de modificar el archivo `.npmrc`, ejecuta `pnpm install` otra vez para 
 
 ## Licencia de uso
 
-La licencia de uso está protegida bajo: [MIT license](https://github.com/frontio-ai/vite-template/blob/main/LICENSE).
+La licencia de uso está protegida bajo: [MIT license](https://github.com/MatiKHO/QHN_Frontend/LICENSE).
